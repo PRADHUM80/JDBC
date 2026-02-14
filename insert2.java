@@ -1,0 +1,55 @@
+import java.sql.*;
+
+public class insert2 {
+    
+    public static void main(String[] args) throws ClassNotFoundException{
+        
+        String url = "jdbc:mysql://localhost:3306/newjdbc";
+        String username = "root";
+        String password = "0069";
+        String query = "INSERT INTO employees(id, name, job_title, salary) VALUES (4, 'Pradhum', 'fullStack', 70000.0);"; 
+
+        try{
+        Class.forName("com.mysql.jdbc.Driver");  // Loaded Driver
+        System.out.println("Driver Loaded SuccessFully");
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            
+            Connection con = DriverManager.getConnection(url, username, password);  // Conection Established
+            System.out.println("Connection Esatblished SuccessFully !");
+
+            // Statement interface...
+            Statement stmt = con.createStatement();
+            int rowsaffected = stmt.executeUpdate(query); // rows add 
+
+            if(rowsaffected > 0) {
+                System.out.println("Insert SuccessFully : " + rowsaffected + "row(s) affected. ");
+
+            } else {
+                System.out.println("Insertion failed!!");
+            }
+
+            stmt.close();
+            con.close();
+            System.out.println("Connection close Successfully");
+
+
+        } 
+        catch(Exception e2) {
+            e2.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+    }
+}
